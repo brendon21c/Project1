@@ -1,0 +1,50 @@
+from flask import Flask, request, flash, url_for, redirect, render_template
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///drivers_records.sqlite3'
+app.config['SECRET_KEY'] = "secret"
+
+db = SQLAlchemy(app)
+
+class Driver_records(db.Model):
+
+    id = db.Column('DriverID', db.Integer, primary_key = True)
+    name = db.Column(db.String(100))
+    address = db.Column(db.String(200))
+    city = db.Column(db.String(50))
+
+    def __init__(self, name, address, city):
+
+        self.name = name
+        self.address = address
+        self.city = city
+
+@app.route('/')
+def home_page():
+    return render_template('home_page.html', driver_records = Driver_records.query.all())
+
+
+@app.route('/new_driver', methods = ['GET', 'POST'])
+def new_driver():
+
+    if request.method == 'POST':
+
+        if not request.form['name'] or not request.form['address'] or not request.form['city']:
+            flash('Please enter in all fields.', 'error')
+
+        else:
+
+            driver = Driver_records(request.form['name'], request.form['address'], request.form['city'])
+
+            db.session.add(driver)
+            db.session.commit()
+            flash('Record added.')
+            return redirect(url_for('home_page'))
+
+    return render_template('new_driver.html')
+
+
+if __name__ == '__main__':
+    db.create_all()
+    app.run(debug = True)

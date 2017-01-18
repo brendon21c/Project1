@@ -1,0 +1,4 @@
+*.pyc
+__pychache__
+.DS_Store
+drivers_records.sqlite3

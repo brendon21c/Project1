@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head></head>
+  <body>
+
+    <h1>
+      <a>Driver Records</a>
+    </h1>
+
+    <h3> Drivers (<a href = "{{ url_for('new_driver') }}"> Add driver </a>)</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>ID</th>
+        </tr>
+      </thead>
+
+      {% for driver in driver_records %}
+        <tr>
+          <td>{{ driver.name }}</td>
+          <td>{{ driver.address }}</td>
+          <td>{{ driver.city }}</td>
+          <td>{{ driver.id }}</td>
+        </tr>
+      {% endfor %}
+
+    </table>
+
+  </body>
+</html>

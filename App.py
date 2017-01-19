@@ -103,6 +103,7 @@ def new_order():
 
     return render_template('new_order.html', driver_records = Driver_records.query.all())
 
+# testing
 
 if __name__ == '__main__':
     db.create_all()

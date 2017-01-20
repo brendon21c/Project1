@@ -6,12 +6,6 @@
     <h1> New Driver Entry Form</h1>
     <hr/>
 
-    {% for category, message in get_flashed_messages(with_categories = true) %}
-      <div class = "alet danger">
-        {{ message }}
-      </div>
-    {% endfor %}
-
     <div>
 
       <form action="{{ request.path }}" method="post">
@@ -29,9 +23,9 @@
         <label for = "ToCity">City</label>
         <input type="text" name="ToCity" placeholder="City" /></br>
         <select name="driverAssign">
-          {% for driverID in driver_records}
+          {% for driverID in driver_records %}
 
-          <<option value="{{ driverID.id }}" selected>{{ driverID.id }}</option>
+          <option value="{{ driverID.id }}" selected>{{ driverID.id }}</option>
 
           {% endfor %}
         <input type="submit" value="Submit" />

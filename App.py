@@ -32,7 +32,7 @@ class Order_Table_Pickup(db.Model):
     name = db.Column(db.String(100))
     address = db.Column(db.String(200))
     city = db.Column(db.String(50))
-    driverID = db.Column(db.Integer, ForeignKey('Driver_records.DriverID'))
+    driverID = db.Column(db.Integer, ForeignKey('driver.DriverID'))
 
     def __init__(self, FromName, FromAddress, FromCity, driverAssign):
 
@@ -49,7 +49,7 @@ class Order_Table_Del(db.Model):
     name = db.Column(db.String(100))
     address = db.Column(db.String(200))
     city = db.Column(db.String(50))
-    driverID = db.Column(db.Integer, ForeignKey('Driver_records.DriverID'))
+    driverID = db.Column(db.Integer, ForeignKey('driver.DriverID'))
 
     def __init__(self, ToName, ToAddress, ToCity, driverAssign):
 
@@ -94,10 +94,10 @@ def new_order():
         orderDel = Order_Table_Del(request.form['ToName'],request.form['ToAddress'],
         request.form['ToCity'],request.form['driverAssign'])
 
-        db.session(orderPickup)
-        db.session(orderDel)
+        db.session.add(orderPickup)
+        db.session.add(orderDel)
+        db.session.commit()
 
-        db.commit()
         flash("Order Added")
         return redirect(url_for('home_page'))
 

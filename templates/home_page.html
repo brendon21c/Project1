@@ -12,25 +12,25 @@
     <table>
       <thead>
         <tr>
+          <th>ID</th>
           <th>Name</th>
           <th>Address</th>
           <th>City</th>
-          <th>ID</th>
         </tr>
       </thead>
 
       {% for driver in driver_records %}
         <tr>
+          <td>{{ driver.id }}</td>
           <td>{{ driver.name }}</td>
           <td>{{ driver.address }}</td>
           <td>{{ driver.city }}</td>
-          <td>{{ driver.id }}</td>
         </tr>
       {% endfor %}
 
     </table>
 
-    <h3> Routes (<a href="{{ url_for('new_route') }}"> Add New Route </a>)</h3>
+    <h3> Routes (<a href="{{ url_for('new_order') }}"> Add New Route </a>)</h3>
 
   </body>
 </html>

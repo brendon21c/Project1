@@ -98,6 +98,7 @@ def new_order():
         db.session.add(orderDel)
         db.session.commit()
 
+
         flash("Order Added")
         return redirect(url_for('home_page'))
 

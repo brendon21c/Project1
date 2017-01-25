@@ -104,18 +104,31 @@ def new_order():
 
     return render_template('new_order.html', driver_records = Driver_records.query.all())
 
-@app.route('/display_orders/')
+# @app.route('/display_orders/')
+# def display_orders():
+
+#     return render_template('display_orders.html', driver_records =  Driver_records.query.all())
+
+
+# @app.route('/display_orders/?driver=<driver_id>')
+# def display_driver_orders(driver_id):
+
+#     print (driver_id)
+
+#     return render_template('display_driver_orders.html',driver_records =  Driver_records.query.all(), Order_Table_Pickup =  Order_Table_Pickup.query.filter_by(driverAssign = driver_id).all(), Order_Table_Del =  Order_Table_Pickup.query.filter_by(driverAssign = driver_id).all())
+
+@app.route('/display_orders')
 def display_orders():
 
-    return render_template('display_orders.html', driver_records =  Driver_records.query.all())
-
-
-@app.route('/display_orders/?driver=<driver_id>')
-def display_driver_orders(driver_id):
-
-    print (driver_id)
-
-    return render_template('display_driver_orders.html',driver_records =  Driver_records.query.all(), Order_Table_Pickup =  Order_Table_Pickup.query.filter_by(driverAssign = driver_id).all(), Order_Table_Del =  Order_Table_Pickup.query.filter_by(driverAssign = driver_id).all())
+    # This responds to /display_orders/ and there will be nothing in request.args
+    # And also /display_orders?driver=1  and there will be a value in request.args.get('driver') (in this case, 1)
+    if not request.args.get('driver'):
+        return render_template('display_orders.html', driver_records =  Driver_records.query.all())
+    else :
+        #return "driver form AND driver data for one driver id here"
+        driver_id = int(request.args.get('driver'))
+        app.logger.debug('get data for {} '.format(driver_id))
+        return render_template('display_driver_orders.html', driver_records =  Driver_records.query.all(), Order_Table_Pickup =  Order_Table_Pickup.query.filter_by(driverAssign = driver_id).all(), Order_Table_Del =  Order_Table_Pickup.query.filter_by(driverAssign = driver_id).all())
 
 
 if __name__ == '__main__':

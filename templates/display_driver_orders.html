@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <h1> Display All Routes For Driver </h1>
+
+  <body>
+    <p>
+    <p>
+
+    <div>
+      <form>
+
+        <select name="driver">
+
+          {% for driverID in driver_records %}
+
+          <option value="{{ driverID.id }}" selected>{{ driverID.id }}</option>
+
+          {% endfor %}
+
+          <input type="submit" value="Submit" />
+
+      </form>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>From Name</th>
+          <th>From Address</th>
+          <th>From City</th>
+        </tr>
+      </thead>
+
+      {% for order in Order_Table_Pickup %}
+        <tr>
+          <td>{{ order.id }}</td>
+          <td>{{ order.name }}</td>
+          <td>{{ order.address }}</td>
+          <td>{{ order.city }}</td>
+        </tr>
+      {% endfor %}
+
+    </table>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>To Name</th>
+          <th>To Address</th>
+          <th>To City</th>
+        </tr>
+      </thead>
+
+      {% for order in Order_Table_Del %}
+        <tr>
+          <td>{{ order.id }}</td>
+          <td>{{ order.name }}</td>
+          <td>{{ order.address }}</td>
+          <td>{{ order.city }}</td>
+        </tr>
+      {% endfor %}
+
+    </table>
+
+  <a href="/">Go Home</a>
+  </body>
+</html>

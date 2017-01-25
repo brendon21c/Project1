@@ -36,10 +36,10 @@ class Order_Table_Pickup(db.Model):
 
     def __init__(self, FromName, FromAddress, FromCity, driverAssign):
 
-        self.FromName = FromName
-        self.FromAddress = FromAddress
-        self.FromCity = FromCity
-        self.driverAssign = driverAssign
+        self.name = FromName
+        self.address = FromAddress
+        self.city = FromCity
+        self.driverID = driverAssign
 
 
 class Order_Table_Del(db.Model):
@@ -53,10 +53,10 @@ class Order_Table_Del(db.Model):
 
     def __init__(self, ToName, ToAddress, ToCity, driverAssign):
 
-        self.ToName = ToName
-        self.ToAddress = ToAddress
-        self.ToCity = ToCity
-        self.driverAssign = driverAssign
+        self.name = ToName
+        self.address = ToAddress
+        self.city = ToCity
+        self.driverID = driverAssign
 
 
 @app.route('/')
@@ -104,7 +104,19 @@ def new_order():
 
     return render_template('new_order.html', driver_records = Driver_records.query.all())
 
-# testing
+@app.route('/display_orders/')
+def display_orders():
+
+    return render_template('display_orders.html', driver_records =  Driver_records.query.all())
+
+
+@app.route('/display_orders/?driver=<driver_id>')
+def display_driver_orders(driver_id):
+
+    print (driver_id)
+
+    return render_template('display_driver_orders.html',driver_records =  Driver_records.query.all(), Order_Table_Pickup =  Order_Table_Pickup.query.filter_by(driverAssign = driver_id).all(), Order_Table_Del =  Order_Table_Pickup.query.filter_by(driverAssign = driver_id).all())
+
 
 if __name__ == '__main__':
     db.create_all()

@@ -1,0 +1,26 @@
+
+
+.container{
+    background-color: oldlace;
+    color:darkslategray;
+
+}
+
+
+/*Apply style to all li elements*/
+li {
+
+    color: black;
+    font-style: italic;
+}
+
+ul {
+
+  font-style: italic;
+
+}
+
+a {
+
+    color: black;
+}

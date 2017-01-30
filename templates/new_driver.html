@@ -1,29 +1,61 @@
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="UTF-8">
 
-  <body>
 
-    <h1> New Driver Entry Form</h1>
-    <hr/>
+<!-- The viewport is the visible area of a page. Pages may be wider
+than the screen or browser window; and pages are often longer than
+the browser window. This tag sets the width of the page equal to the
+width of the browser window. The height stays the same. -->
+<meta name="viewport" content="width=device-width initial-scale=1">
 
-    {% for category, message in get_flashed_messages(with_categories = true) %}
-      <div class = "alet danger">
-        {{ message }}
-      </div>
-    {% endfor %}
 
-    <div>
+<!-- Include Bootstrap. This downloads Bootstrap from a CDN. You can
+ also host Bootstrap on your server, but it's usually faster for the
+ user for their browser to fetch it from a CDN. -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-      <form action="{{ request.path }}" method="post">
-        <label for = "name">Name</label>
-        <input type="text" name="name" placeholder="Name" /></br>
-        <label for = "address">Address</label>
-        <input type="text" name="address" placeholder="Address" /></br>
-        <label for = "city">City</label>
-        <input type="text" name="city" placeholder="City" /></br>
-        <input type="submit" value="Submit" />
-      </form>
+<!-- Nav components, and dropdowns, need Bootstrap's JavaScript to do anything.
+And JavaScript requires JQuery, so include that too -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1> New Driver Entry Form</h1>
+
+    <ul class="nav nav-tabs">
+
+      <li class="active"><a href = "/">Home</a></li>
+      <li><a href = "{{ url_for('new_driver') }}"> Add driver</a></li>
+      <li><a href = "{{ url_for('new_order') }}"> Add New Route</a></li>
+      <li><a href = "{{ url_for('display_orders') }}"> Show Routes for Drivers</a></li>
+
+    </ul>
+
+  {% for category, message in get_flashed_messages(with_categories = true) %}
+    <div class = "alet danger">
+      {{ message }}
     </div>
+  {% endfor %}
 
-  </body>
+  <div>
+
+    <form action="{{ request.path }}" method="post">
+      <label for = "name">Name</label>
+      <input type="text" name="name" placeholder="Name" /></br>
+      <label for = "address">Address</label>
+      <input type="text" name="address" placeholder="Address" /></br>
+      <label for = "city">City</label>
+      <input type="text" name="city" placeholder="City" /></br>
+      <input type="submit" value="Submit" />
+    </form>
+  </div>
+
+</body>
 </html>

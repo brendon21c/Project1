@@ -25,6 +25,7 @@ class Driver_records(db.Model):
         self.address = address
         self.city = city
 
+# Table setup for order Pickups
 class Order_Table_Pickup(db.Model):
 
     __tablename__ = 'orderPickup'
@@ -41,7 +42,7 @@ class Order_Table_Pickup(db.Model):
         self.city = FromCity
         self.driverID = driverAssign
 
-
+# Table setup for order Deliveries
 class Order_Table_Del(db.Model):
 
     __tablename__ = 'orderDel'
@@ -63,7 +64,7 @@ class Order_Table_Del(db.Model):
 def home_page():
     return render_template('home_page.html', driver_records = Driver_records.query.all())
 
-
+# This creates a new driver and adds them to the database.
 @app.route('/new_driver', methods = ['GET', 'POST'])
 def new_driver():
 
@@ -88,14 +89,17 @@ def new_order():
 
     if request.method == 'POST':
 
+        # Parameters for adding new orders to Pickup and Delivery tables
         orderPickup = Order_Table_Pickup(request.form['FromName'],request.form['FromAddress'],
         request.form['FromCity'],request.form['driverAssign'])
 
         orderDel = Order_Table_Del(request.form['ToName'],request.form['ToAddress'],
         request.form['ToCity'],request.form['driverAssign'])
 
+        # Add to session
         db.session.add(orderPickup)
         db.session.add(orderDel)
+        # Write to database
         db.session.commit()
 
 
@@ -104,31 +108,20 @@ def new_order():
 
     return render_template('new_order.html', driver_records = Driver_records.query.all())
 
-# @app.route('/display_orders/')
-# def display_orders():
-
-#     return render_template('display_orders.html', driver_records =  Driver_records.query.all())
-
-
-# @app.route('/display_orders/?driver=<driver_id>')
-# def display_driver_orders(driver_id):
-
-#     print (driver_id)
-
-#     return render_template('display_driver_orders.html',driver_records =  Driver_records.query.all(), Order_Table_Pickup =  Order_Table_Pickup.query.filter_by(driverAssign = driver_id).all(), Order_Table_Del =  Order_Table_Pickup.query.filter_by(driverAssign = driver_id).all())
-
 @app.route('/display_orders')
 def display_orders():
 
     # This responds to /display_orders/ and there will be nothing in request.args
     # And also /display_orders?driver=1  and there will be a value in request.args.get('driver') (in this case, 1)
     if not request.args.get('driver'):
+
         return render_template('display_orders.html', driver_records =  Driver_records.query.all())
+
     else :
         #return "driver form AND driver data for one driver id here"
         driver_id = int(request.args.get('driver'))
         app.logger.debug('get data for {} '.format(driver_id))
-        return render_template('display_driver_orders.html', driver_records =  Driver_records.query.all(), Order_Table_Pickup =  Order_Table_Pickup.query.filter_by(driverAssign = driver_id).all(), Order_Table_Del =  Order_Table_Pickup.query.filter_by(driverAssign = driver_id).all())
+        return render_template('display_orders.html',driver_records =  Driver_records.query.all(), Order_Table_Pickup =  Order_Table_Pickup.query.filter_by(driverID = driver_id).all(), Order_Table_Del =  Order_Table_Del.query.filter_by(driverID = driver_id).all())
 
 
 if __name__ == '__main__':

@@ -1,23 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head></head>
-  <body>
+<head>
 
-    <h1>
-      <a>Driver Records</a>
-    </h1>
+  <meta charset="UTF-8">
 
-    <h3> Drivers (<a href = "{{ url_for('new_driver') }}"> Add driver </a>)</h3>
 
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Address</th>
-          <th>City</th>
-        </tr>
-      </thead>
+  <!-- The viewport is the visible area of a page. Pages may be wider
+  than the screen or browser window; and pages are often longer than
+  the browser window. This tag sets the width of the page equal to the
+  width of the browser window. The height stays the same. -->
+  <meta name="viewport" content="width=device-width initial-scale=1">
+
+
+  <!-- Include Bootstrap. This downloads Bootstrap from a CDN. You can
+   also host Bootstrap on your server, but it's usually faster for the
+   user for their browser to fetch it from a CDN. -->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- Nav components, and dropdowns, need Bootstrap's JavaScript to do anything.
+  And JavaScript requires JQuery, so include that too -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+
+<div class="container">
+
+
+  <h1>Driver Records</h1>
+
+  <ul class="nav nav-tabs">
+
+    <li class="active"><a href = "/">Home</a></li>
+    <li><a href = "{{ url_for('new_driver') }}"> Add driver</a></li>
+    <li><a href = "{{ url_for('new_order') }}"> Add New Route</a></li>
+    <li><a href = "{{ url_for('display_orders') }}"> Show Routes for Drivers</a></li>
+
+  </ul>
+
+
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>City</th>
+      </tr>
+    </thead>
 
       {% for driver in driver_records %}
         <tr>
@@ -28,11 +61,9 @@
         </tr>
       {% endfor %}
 
-    </table>
+  </table>
 
-    <h3> Routes (<a href="{{ url_for('new_order') }}"> Add New Route </a>)</h3>
+</div>
 
-    <h3> Display (<a href="{{ url_for('display_orders') }}"> Show Routes for Drivers </a>)</h3>
-
-  </body>
+</body>
 </html>

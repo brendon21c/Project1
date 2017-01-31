@@ -1,0 +1,27 @@
+
+
+ul. nav nav-tabs {
+
+    font-style: italic;
+
+
+}
+
+li.active {
+
+  background-color: white;
+
+
+}
+
+.container {
+
+  background-color: white;
+
+}
+
+.table {
+
+  table-layout: auto;
+  word-wrap: break-word;;
+}

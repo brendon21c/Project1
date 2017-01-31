@@ -16,6 +16,8 @@ width of the browser window. The height stays the same. -->
  user for their browser to fetch it from a CDN. -->
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+<link rel="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
+
 <!-- Nav components, and dropdowns, need Bootstrap's JavaScript to do anything.
 And JavaScript requires JQuery, so include that too -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

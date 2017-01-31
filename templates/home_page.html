@@ -15,7 +15,10 @@
   <!-- Include Bootstrap. This downloads Bootstrap from a CDN. You can
    also host Bootstrap on your server, but it's usually faster for the
    user for their browser to fetch it from a CDN. -->
+
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
 
   <!-- Nav components, and dropdowns, need Bootstrap's JavaScript to do anything.
   And JavaScript requires JQuery, so include that too -->
@@ -26,7 +29,7 @@
 <body>
 
 
-<div class="container">
+<div class="container"> <!-- I cannot seem to change the background color of the container. -->
 
 
   <h1>Driver Records</h1>
@@ -39,6 +42,7 @@
     <li><a href = "{{ url_for('display_orders') }}"> Show Routes for Drivers</a></li>
 
   </ul>
+
 
 
 
@@ -64,6 +68,5 @@
   </table>
 
 </div>
-
 </body>
 </html>
